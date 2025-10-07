@@ -108,7 +108,10 @@ const Users = () => {
       setMessage("User created successfully");
       createForm.reset();
     } catch (error) {
-      setError(error.response?.data?.detail || "Failed to create user. Please try again.");
+      setError(
+        error.response?.data?.detail ||
+          "Failed to create user. Please try again."
+      );
     } finally {
       setIsCreating(false);
     }
@@ -127,12 +130,17 @@ const Users = () => {
         ...data,
         role_id: parseInt(data.role_id),
       });
-      setUsers(users.map((user) => (user.id === editUser.id ? response.data : user)));
+      setUsers(
+        users.map((user) => (user.id === editUser.id ? response.data : user))
+      );
       setMessage("User updated successfully");
       setEditUser(null);
       editForm.reset();
     } catch (error) {
-      setError(error.response?.data?.detail || "Failed to update user. Please try again.");
+      setError(
+        error.response?.data?.detail ||
+          "Failed to update user. Please try again."
+      );
     } finally {
       setIsEditing(false);
     }
@@ -172,12 +180,16 @@ const Users = () => {
     });
   };
 
-  const filteredUsers = users.filter(
-    (user) => user.name?.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredUsers = users.filter((user) =>
+    user.name?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   if (isLoading || isLoadingPermissions) {
-    return <div className="flex justify-center items-center min-h-screen"><Loading /></div>;
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <Loading />
+      </div>
+    );
   }
 
   return (
@@ -188,7 +200,9 @@ const Users = () => {
       transition={{ duration: 0.5 }}
     >
       <h1 className="text-2xl font-bold mb-6">User Management</h1>
-      <p className="text-gray-600 mb-8">Create and manage users and their roles.</p>
+      <p className="text-gray-600 mb-8">
+        Create and manage users and their roles.
+      </p>
       {error && (
         <motion.div
           className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6"
@@ -218,7 +232,10 @@ const Users = () => {
         >
           <h3 className="text-xl font-semibold mb-4">Create User</h3>
           <FormProvider {...createForm}>
-            <form onSubmit={createForm.handleSubmit(onCreateUser)} className="space-y-4">
+            <form
+              onSubmit={createForm.handleSubmit(onCreateUser)}
+              className="space-y-4"
+            >
               <Input
                 type="email"
                 label="Email address"
@@ -267,7 +284,7 @@ const Users = () => {
             </form>
           </FormProvider>
         </motion.div>
-        
+
         <motion.div
           className="bg-white rounded-2xl shadow-xl p-6"
           initial={{ opacity: 0, x: 20 }}
@@ -299,19 +316,33 @@ const Users = () => {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Email
+                  </th>
+                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Name
+                  </th>
+                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Role
+                  </th>
+                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {filteredUsers.length > 0 ? (
                   filteredUsers.map((user) => (
                     <tr key={user.id} className="hover:bg-gray-50">
-                      <td className="px-4 py-3 text-sm text-gray-900">{user.email}</td>
-                      <td className="px-4 py-3 text-sm text-gray-900">{user.name || "-"}</td>
-                      <td className="px-4 py-3 text-sm text-gray-500">{user.role?.name || "-"}</td>
+                      <td className="px-4 py-3 text-sm text-gray-900">
+                        {user.email}
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-900">
+                        {user.name || "-"}
+                      </td>
+                      <td className="px-4 py-3 text-sm text-gray-500">
+                        {user.role?.name || "-"}
+                      </td>
                       <td className="flex px-4 py-3 whitespace-nowrap text-sm font-medium">
                         <Button
                           onClick={() => openEditModal(user)}
@@ -340,8 +371,13 @@ const Users = () => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="4" className="px-4 py-8 text-center text-gray-500">
-                      {searchQuery ? "No users match the search." : "No users found."}
+                    <td
+                      colSpan="4"
+                      className="px-4 py-8 text-center text-gray-500"
+                    >
+                      {searchQuery
+                        ? "No users match the search."
+                        : "No users found."}
                     </td>
                   </tr>
                 )}
@@ -350,12 +386,19 @@ const Users = () => {
           </div>
         </motion.div>
       </div>
-      
+
       <AnimatePresence>
         {editUser && (
-          <Modal isOpen={!!editUser} onClose={() => setEditUser(null)} title="Edit User">
+          <Modal
+            isOpen={!!editUser}
+            onClose={() => setEditUser(null)}
+            title="Edit User"
+          >
             <FormProvider {...editForm}>
-              <form onSubmit={editForm.handleSubmit(onEditUser)} className="space-y-4">
+              <form
+                onSubmit={editForm.handleSubmit(onEditUser)}
+                className="space-y-4"
+              >
                 <Input
                   type="email"
                   label="Email address"

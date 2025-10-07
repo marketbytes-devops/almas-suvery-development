@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaBars, FaSignOutAlt } from "react-icons/fa";
 import apiClient from "../../../api/apiClient";
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const routeNames = {
   "/": "Dashboard",
@@ -17,6 +17,10 @@ const routeNames = {
   "/survey/:surveyId/article": "Article",
   "/survey/:surveyId/article/view-article": "View Articles",
   "/survey/:surveyId/service": "Service",
+  "/survey/:surveyId/manage-article": "Manage Article",
+
+  // Survey Summary
+  "/survey_summary": "Survey Summary",
 
   // Additional Settings
   "/additional-settings/types": "Types",
@@ -97,9 +101,7 @@ const Topbar = ({ toggleSidebar, isSidebarOpen, isAuthenticated, setIsAuthentica
 
   return (
     <div
-      className={`bg-gradient-to-r from-[#4c7085] to-[#6b8ca3] shadow px-4 sm:px-6 py-3 flex items-center justify-between sticky top-0 z-10 rounded-b-lg ${
-        isSidebarOpen ? "md:mx-6" : "mx-4 sm:mx-6"
-      }`}
+      className={`bg-gradient-to-r from-[#4c7085] to-[#6b8ca3] shadow px-4 sm:px-6 py-3 flex items-center justify-between sticky top-0 z-10 rounded-b-lg ${isSidebarOpen ? "md:mx-6" : "mx-4 sm:mx-6"}`}
     >
       <div className="flex items-center space-x-4">
         <motion.button

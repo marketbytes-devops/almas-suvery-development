@@ -29,7 +29,8 @@ import Tax from "./pages/AdditionalSettings/Tax";
 import Handyman from "./pages/AdditionalSettings/Handyman";
 import Manpower from "./pages/AdditionalSettings/Manpower";
 import Room from "./pages/AdditionalSettings/Room";
-import AddArticle from "./pages/SurveyDetails/Article/AddArticle";
+import ManageArticle from "./pages/SurveyDetails/Article/ManageArticle";
+import SurveySummary from "./pages/SurveySummary";
 
 const ProtectedRoute = ({ children, isAuthenticated, requiredPage, requiredAction = "view" }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -170,10 +171,10 @@ function App() {
           ),
         },
         {
-          path: "/survey/:surveyId/add-article",
+          path: "/survey/:surveyId/manage-article",
           element: (
             <ProtectedRoute isAuthenticated={isAuthenticated} requiredPage="survey_article">
-              <AddArticle />
+              <ManageArticle />
             </ProtectedRoute>
           ),
         },
@@ -198,6 +199,14 @@ function App() {
           element: (
             <ProtectedRoute isAuthenticated={isAuthenticated} requiredPage="survey_service">
               <Service />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/survey_summary",
+          element: (
+            <ProtectedRoute isAuthenticated={isAuthenticated} requiredPage="survey_summary">
+              <SurveySummary />
             </ProtectedRoute>
           ),
         },

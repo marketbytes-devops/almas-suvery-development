@@ -5,7 +5,7 @@ import apiClient from "../../../api/apiClient";
 import Button from "../../../components/Button";
 import Input from "../../../components/Input";
 
-const AddArticle = () => {
+const ManageArticle = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { surveyId, customerData, articles = [], vehicles = [] } = location.state || {};
@@ -262,4 +262,4 @@ const AddArticle = () => {
   );
 };
 
-export default AddArticle;
+export default ManageArticle;

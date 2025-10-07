@@ -61,6 +61,9 @@ def set_default_permissions(sender, instance, created, **kwargs):
             {'page': 'survey_pet', 'can_view': True, 'can_add': False, 'can_edit': False, 'can_delete': False},
             {'page': 'survey_service', 'can_view': True, 'can_add': False, 'can_edit': False, 'can_delete': False},
             
+            # Start Survey Summary Page
+            {'page': 'survey_summary', 'can_view': True, 'can_add': False, 'can_edit': False, 'can_delete': False},
+            
             # Additional Settings Pages
             {'page': 'types', 'can_view': True, 'can_add': False, 'can_edit': False, 'can_delete': False},
             {'page': 'units', 'can_view': True, 'can_add': False, 'can_edit': False, 'can_delete': False},

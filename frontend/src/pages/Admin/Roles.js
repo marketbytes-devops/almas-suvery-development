@@ -82,7 +82,10 @@ const Roles = () => {
       setMessage("Role created successfully");
       createForm.reset();
     } catch (error) {
-      setError(error.response?.data?.detail || "Failed to create role. Please try again.");
+      setError(
+        error.response?.data?.detail ||
+          "Failed to create role. Please try again."
+      );
     } finally {
       setIsCreating(false);
     }
@@ -109,7 +112,11 @@ const Roles = () => {
   );
 
   if (isLoading || isLoadingPermissions) {
-    return <div className="flex justify-center items-center min-h-screen"><Loading /></div>;
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <Loading />
+      </div>
+    );
   }
 
   return (
@@ -150,7 +157,10 @@ const Roles = () => {
         >
           <h3 className="text-xl font-semibold mb-4">Create Role</h3>
           <FormProvider {...createForm}>
-            <form onSubmit={createForm.handleSubmit(onCreateRole)} className="space-y-4">
+            <form
+              onSubmit={createForm.handleSubmit(onCreateRole)}
+              className="space-y-4"
+            >
               <Input
                 type="text"
                 label="Role Name"
@@ -179,7 +189,7 @@ const Roles = () => {
             </form>
           </FormProvider>
         </motion.div>
-        
+
         <motion.div
           className="bg-white rounded-2xl shadow-xl p-6"
           initial={{ opacity: 0, x: 20 }}
@@ -211,17 +221,30 @@ const Roles = () => {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role Name</th>
-                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Role Name
+                  </th>
+                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Description
+                  </th>
+                  <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {filteredRoles.length > 0 ? (
                   filteredRoles.map((role) => (
                     <tr key={role.id} className="hover:bg-gray-50">
-                      <td className="px-4 py-3 text-sm font-medium text-gray-900">{role.name}</td>
-                      <td className="px-4 py-3 text-sm text-gray-500 max-w-xs truncate" title={role.description || "No description"}>{role.description || "No description"}</td>
+                      <td className="px-4 py-3 text-sm font-medium text-gray-900">
+                        {role.name}
+                      </td>
+                      <td
+                        className="px-4 py-3 text-sm text-gray-500 max-w-xs truncate"
+                        title={role.description || "No description"}
+                      >
+                        {role.description || "No description"}
+                      </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm font-medium">
                         <Button
                           onClick={() => handleDeleteRole(role.id)}
@@ -239,8 +262,13 @@ const Roles = () => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="3" className="px-4 py-8 text-center text-gray-500">
-                      {searchQuery ? "No roles match the search." : "No roles found."}
+                    <td
+                      colSpan="3"
+                      className="px-4 py-8 text-center text-gray-500"
+                    >
+                      {searchQuery
+                        ? "No roles match the search."
+                        : "No roles found."}
                     </td>
                   </tr>
                 )}
